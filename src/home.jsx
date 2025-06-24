@@ -4,12 +4,13 @@ function Home() {
   let [search, setsearch] = useState("");
   let [result, setresult] = useState([]);
   let [debouncedSearch, setDebouncedSearch] = useState("");
-  let [popit, setpop] = useState(null)
-  
+  let [popit, setpop] = useState(null);
+  let [loading, setloading] = useState(true);
 
   useEffect(() => {
     const abort = new AbortController();
     const getdata = async () => {
+      setloading(true);
       try {
         const query = search;
         const res = await fetch(`https://api.jikan.moe/v4/anime?q=${query}`, {
@@ -26,36 +27,41 @@ function Home() {
         } else {
           console.error("fetch failed", error.message);
         }
+      } finally {
+        setloading(false);
       }
     };
     getdata();
     return () => abort.abort();
   }, [search]);
 
-    useEffect(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
       setDebouncedSearch(search);
     }, 300);
 
-    return () => clearTimeout(timeout); 
+    return () => clearTimeout(timeout);
   }, [search]);
-
-
-  
 
   return (
     <div className="home-cont">
       <div className="search-cont">
-        <input type="text" placeholder="search" onChange={(e) => 
+        <input
+          type="text"
+          placeholder="search anime"
+          onChange={(e) =>
             setTimeout(() => {
-                setsearch(e.target.value)
-            }, 300)} />
+              setsearch(e.target.value);
+            }, 300)
+          }
+        />
         <button className="search-but">
           <span className="material-symbols-outlined">search</span>
         </button>
       </div>
       <div className="content-cont">
         <div className="contents-cont">
+          {loading && <h1>loading</h1>}
           {result.map((res) => (
             <div className="divs" key={res.mal_id} onClick={() => setpop(res)}>
               <div
@@ -63,7 +69,10 @@ function Home() {
                 style={{ backgroundImage: `url(${res.images.jpg.image_url})` }}
               ></div>
               <div className="details">
-                <p className="title" style={{fontSize: "15px"}}> {res.title}</p>
+                <p className="title" style={{ fontSize: "15px" }}>
+                  {" "}
+                  {res.title}
+                </p>
                 <p>{res.status}</p>
                 <p>Released data: {res.year}</p>
                 <p>⭐{res.score}⭐</p>
@@ -75,24 +84,24 @@ function Home() {
 
       {popit && (
         <div className="pop-overlay" onClick={() => setpop(null)}>
-         <div className="selected-cont" onClick={(e) => e.stopPropagation()}>
+          <div className="selected-cont" onClick={(e) => e.stopPropagation()}>
             <div className="pop-img-cont">
-                <div className="pop-img" style={{ backgroundImage: `url(${popit.images.jpg.image_url})` }}></div>
-                <div className="pop-rating">⭐{popit.score}⭐</div>
+              <div
+                className="pop-img"
+                style={{
+                  backgroundImage: `url(${popit.images.jpg.image_url})`,
+                }}
+              ></div>
+              <div className="pop-rating">⭐{popit.score}⭐</div>
             </div>
             <div className="pop-details">
-                <div className="pop-header">{popit.title}</div>
-                <div className="pop-body">{popit.synopsis}</div>
-                <div className="pop-genre">{popit.status}</div>
+              <div className="pop-header">{popit.title}</div>
+              <div className="pop-body">{popit.synopsis}</div>
+              <div className="pop-genre">{popit.status}</div>
             </div>
-         </div>
-      </div>
+          </div>
+        </div>
       )}
-      
-     {/*popit && (
-        
-      )*/}
-      
     </div>
   );
 }
