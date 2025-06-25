@@ -1,6 +1,107 @@
-.cat-cont{
-    width: 100vw;
-    height: calc(100vh - 60px);
-    overflow-x: hidden;
-    margin-top: 60px;
+.cat-cont {
+  width: 100vw;
+  height: calc(100vh - 60px);
+  overflow-x: hidden;
+  margin-top: 60px;
+  background-image: url(/public/img/b1.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.cat-container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(14, 38, 48, 0.7);
+  display: flex;
+}
+.cat-but-cont {
+  width: 15%;
+  height: 100%;
+  background-color: rgba(14, 38, 48, 0.7);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.cat-main-cont {
+  width: 85%;
+  height: 100%;
+}
+.anime {
+  background-color: rgba(14, 38, 48, 1);
+}
+.anime:hover {
+  background-color: rgba(14, 38, 48, 1);
+  color: white;
+}
+.cat-but-cont > div {
+  width: 100%;
+  height: 7%;
+  border: none;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+.cat-but-cont > div:not(.anime):hover {
+  color: black;
+  background-color: rgba(135, 206, 235, 0.5);
+}
+.btn {
+  width: 100%;
+  height: 7%;
+  border: none;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+.btn.active {
+  width: 100%;
+  height: 7%;
+  border: none;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: black;
+  background-color: rgba(135, 206, 235, 0.5);
+}
+.categories-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  overflow: scroll;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
+}
+.divs {
+  background-color: palevioletred;
+  width: 300px;
+  height: 500px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  flex-direction: column;
+  background-color: aliceblue;
+}
+.image-cont {
+  width: 95%;
+  height: 70%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.details {
+  width: 95%;
+  height: 25%;
+  font-size: 10px;
+  font-family: "ghibli";
 }

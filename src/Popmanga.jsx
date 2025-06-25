@@ -9,7 +9,7 @@ function Popmanga() {
      return (
        <div className="manga-cont">
          <div className="manga-bg">
-           <div className="manga-container" style={{width: "100%"}}>
+           <div className="manga-container" style={{width: "100%", height: "100%"}}>
              {loading && <h1>loading</h1>}
              {data.map((res) => (
                <div className="divs" key={res.mal_id} onClick={() => setpopp(res)}>

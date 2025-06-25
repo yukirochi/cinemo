@@ -55,9 +55,7 @@ function Home() {
             }, 300)
           }
         />
-        <button className="search-but">
-          <span className="material-symbols-outlined">search</span>
-        </button>
+        
       </div>
       <div className="content-cont">
         <div className="contents-cont">
